@@ -5,7 +5,7 @@
 
 int main() {
   matrix_t A;
-  int res = s21_create_matrix(2, 2, &A);
+  int res = s21_create_matrix(3, 2, &A);
   A.matrix[0][0] = 1;
   A.matrix[0][1] = 2;
   A.matrix[1][0] = 3;
@@ -13,5 +13,8 @@ int main() {
 
   printf("RES = %d\n", res);
   print_matrix(A);
+
+	s21_remove_matrix(&A);
+
   return 0;
 }

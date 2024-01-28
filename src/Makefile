@@ -1,5 +1,5 @@
 # all, clean, test, s21_decimal.a, gcov_report
-GCC=gcc
+GCC=gcc -g
 CFALGS=-Wall -Werror -Wextra -std=c11
 SOURCES=*.c
 TESTS_SOURCES=tests/*.c
