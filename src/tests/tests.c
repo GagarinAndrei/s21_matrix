@@ -16,6 +16,6 @@ int main(void) {
     srunner_free(sr);
   }
 
-  printf("\033[45m============ TESTS FAILED: %d ===========\033[0m\n", failed);
+  printf("\033[34m\033[47m============ TESTS FAILED: %d ===========\033[0m\n", failed);
   return 0;
 }
