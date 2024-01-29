@@ -9,5 +9,7 @@
 
 Suite *test_create_matrix(void);
 Suite *test_remove_matrix(void);
+Suite *test_eq_matrix(void);
+Suite *test_sum_matrix(void);
 
 #endif

@@ -1,6 +1,9 @@
 #ifndef S21_MATRIX_H
 #define S21_MATRIX_H
+#define ACCURACY 1e-07
 #include <stdio.h>
+#include <stdlib.h>
+
 /*  0 - OK
     1 - Ошибка, некорректная матрица
     2 - Ошибка вычисления (несовпадающие размеры матриц; матрица, для которой
