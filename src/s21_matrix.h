@@ -4,11 +4,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-/*  0 - OK
-    1 - Ошибка, некорректная матрица
-    2 - Ошибка вычисления (несовпадающие размеры матриц; матрица, для которой
-   нельзя провести вычисления и т.д.)
-*/
 #define SUCCESS 1
 #define FAILURE 0
 
@@ -17,6 +12,8 @@ typedef struct matrix_struct {
   int rows;
   int columns;
 } matrix_t;
+
+#include "utils.h"
 
 int s21_create_matrix(int rows, int columns, matrix_t *result);
 void s21_remove_matrix(matrix_t *A);

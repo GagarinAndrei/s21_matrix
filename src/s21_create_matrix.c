@@ -1,5 +1,5 @@
 #include "s21_matrix.h"
-#include "utils.h"
+// #include "utils.h"
 
 /**
  * Создаёт структуру matrix_t

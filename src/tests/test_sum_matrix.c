@@ -6,7 +6,7 @@ START_TEST(s21_sum_matrix_1) {
   int result_code;
   matrix_t A, B, result, reference;
   s21_create_matrix(2, 2, &A);
-  A.matrix[0][0] = 1;
+  A.matrix[0][0] = 1.23456789;
   A.matrix[0][1] = 2;
   A.matrix[1][0] = 3;
   A.matrix[1][1] = 4;
@@ -16,7 +16,7 @@ START_TEST(s21_sum_matrix_1) {
   B.matrix[1][0] = 3;
   B.matrix[1][1] = 4;
   s21_create_matrix(2, 2, &reference);
-  reference.matrix[0][0] = 2;
+  reference.matrix[0][0] = 2.2345678;
   reference.matrix[0][1] = 4;
   reference.matrix[1][0] = 6;
   reference.matrix[1][1] = 8;

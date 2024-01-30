@@ -9,7 +9,7 @@
 
 void print_matrix(matrix_t A) {
   for (int i = 0; i < A.rows; i++) {
-    for (int ii = 0; ii < A.columns; ii++) printf("%10.7lf ", A.matrix[i][ii]);
+    for (int ii = 0; ii < A.columns; ii++) printf("%10lf ", A.matrix[i][ii]);
     printf("\n");
   }
   printf("==============================\n");
