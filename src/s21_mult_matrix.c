@@ -47,11 +47,11 @@ int s21_mult_matrix(matrix_t *A, matrix_t *B, matrix_t *result) {
   else {
     for (int i = 0; i < A->rows; i++) {
       for (int ii = 0; ii < A->columns; ii++) {
-        result->matrix[i][ii] = A->matrix[i][ii] * B->matrix[i][ii];
+        
+        result->matrix[i][ii] = A->matrix[i][ii] * B->matrix[ii][i];
       }
     }
   }
 
   return result_code;
-  return 0;
 }
