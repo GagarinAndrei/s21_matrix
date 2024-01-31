@@ -1,4 +1,5 @@
 #include "s21_matrix.h"
+#include "utils.h"
 // #include "utils.h"
 
 /**
@@ -15,15 +16,19 @@
 int s21_create_matrix(int rows, int columns, matrix_t *result) {
   int result_code = 0;
   int calloc_success_count = 0;
-  if (is_structure_null(result) || rows <= 0 || columns <= 0 || result == NULL)
+  if (is_structure_null(result)) return 1;
+  if (rows <= 0 || columns <= 0 || result == NULL) {
+    result->rows = 0;
+    result->columns = 0;
+    result->matrix = NULL;
     return 1;
+  }
 
   result->matrix = (double **)calloc(rows, sizeof(double *));
   if (result->matrix == NULL) result_code = 2;
-
   for (int i = 0; i < rows; i++) {
     result->matrix[i] = calloc(columns, sizeof(double));
-    if (result->matrix == NULL) result_code = 2;
+    if (result->matrix[i] == NULL) result_code = 2;
     calloc_success_count++;
   }
 
