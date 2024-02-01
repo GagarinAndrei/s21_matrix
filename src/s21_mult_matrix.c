@@ -1,5 +1,4 @@
 #include "s21_matrix.h"
-#include "utils.h"
 
 /**
  * Умножение матрицы на число matrix_t

@@ -12,7 +12,9 @@
  *         которой нельзя провести вычисления и т.д.)
  */
 int s21_transpose(matrix_t *A, matrix_t *result) {
-  if (!is_correct_matrix(*A) || !is_correct_matrix(*result)) return 1;
+  if (A == NULL || result == NULL || !is_correct_matrix(*A) ||
+      !is_correct_matrix(*result))
+    return 1;
   if (A->rows != result->columns || A->columns != result->rows) return 2;
   int return_code = 0;
   for (int i = 0; i < A->rows; i++) {

@@ -1,7 +1,6 @@
 #include <math.h>
 
 #include "s21_matrix.h"
-#include "utils.h"
 
 /**
  * Сравнивает структуры matrix_t
