@@ -57,4 +57,4 @@ double matrix_minor(matrix_t *A, element_index index) {
   return 0;
 }
 
-void gauss_method(matrix_t *A) {}
+// void gauss_method(matrix_t *A) {}

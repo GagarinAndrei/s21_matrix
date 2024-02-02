@@ -26,6 +26,10 @@ START_TEST(s21_sub_matrix_1) {
 
   ck_assert_int_eq(result_code, 0);
   ck_assert_int_eq(s21_eq_matrix(&result, &reference), 1);
+  s21_remove_matrix(&A);
+  s21_remove_matrix(&B);
+  s21_remove_matrix(&reference);
+  s21_remove_matrix(&result);
 }
 
 START_TEST(s21_sub_matrix_2) {
@@ -46,6 +50,9 @@ START_TEST(s21_sub_matrix_2) {
   result_code = s21_sub_matrix(&A, &B, &result);
 
   ck_assert_int_eq(result_code, 2);
+  s21_remove_matrix(&A);
+  s21_remove_matrix(&B);
+  s21_remove_matrix(&result);
 }
 
 START_TEST(s21_sub_matrix_3) {
@@ -65,6 +72,8 @@ START_TEST(s21_sub_matrix_3) {
   result_code = s21_sub_matrix(&A, &B, NULL);
 
   ck_assert_int_eq(result_code, 1);
+  s21_remove_matrix(&A);
+  s21_remove_matrix(&B);
 }
 
 Suite *test_sub_matrix(void) {

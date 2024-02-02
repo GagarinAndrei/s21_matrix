@@ -23,6 +23,9 @@ START_TEST(s21_transpose_1) {
   result_code = s21_transpose(&A, &result);
   ck_assert_int_eq(result_code, 0);
   ck_assert_int_eq(s21_eq_matrix(&result, &reference), 1);
+  s21_remove_matrix(&A);
+  s21_remove_matrix(&reference);
+  s21_remove_matrix(&result);
 }
 
 START_TEST(s21_transpose_2) {
@@ -37,6 +40,7 @@ START_TEST(s21_transpose_2) {
   A.matrix[2][1] = 6;
   result_code = s21_transpose(&A, NULL);
   ck_assert_int_eq(result_code, 1);
+  s21_remove_matrix(&A);
 }
 
 START_TEST(s21_transpose_3) {
@@ -47,6 +51,8 @@ START_TEST(s21_transpose_3) {
   result_code = s21_transpose(&A, &result);
 
   ck_assert_int_eq(result_code, 2);
+  s21_remove_matrix(&A);
+  s21_remove_matrix(&result);
 }
 
 Suite *test_transpose(void) {

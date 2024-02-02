@@ -6,18 +6,21 @@ START_TEST(s21_create_matrix_1) {
   matrix_t A;
   int return_value = s21_create_matrix(2, 2, &A);
   ck_assert_int_eq(return_value, 0);
+  s21_remove_matrix(&A);
 }
 
 START_TEST(s21_create_matrix_2) {
   matrix_t A;
   int return_value = s21_create_matrix(-3, 2, &A);
   ck_assert_int_eq(return_value, 1);
+  s21_remove_matrix(&A);
 }
 
 START_TEST(s21_create_matrix_3) {
   matrix_t A;
   int return_value = s21_create_matrix(-3, -2, &A);
   ck_assert_int_eq(return_value, 1);
+  s21_remove_matrix(&A);
 }
 
 START_TEST(s21_create_matrix_4) {
