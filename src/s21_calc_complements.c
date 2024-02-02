@@ -1,8 +1,6 @@
-
-#include <stdio.h>
-
 #include "s21_matrix.h"
 #include "utils.h"
+#include <math.h>
 
 /**
  * Матрица алгебоаических дополнений
@@ -15,15 +13,21 @@
  */
 int s21_calc_complements(matrix_t *A, matrix_t *result) {
   int result_code = 0;
-  
+  struct coordinates_struct index = {0};
 
   if (is_structure_null(A) || !is_correct_matrix(*A) ||
       is_structure_null(result))
     result_code = 1;
-  else if (is_square_matrix(*A) || !is_eq_matrix_sizes(result, A))
+  else if (!is_square_matrix(*A) || !is_eq_matrix_sizes(result, A))
     result_code = 2;
   
-  
+  for (int i = 0; i < result->rows; i++) {
+    for (int ii = 0; ii < result->columns; ii++) {
+      index.row = i;
+      index.column = ii;
+      result->matrix[i][ii] = pow(-1, i + ii) * matrix_minor(A, index);
+    }
+  }
 
   return result_code;
 }
@@ -38,7 +42,9 @@ int s21_calc_complements(matrix_t *A, matrix_t *result) {
  *         которой нельзя провести вычисления и т.д.)
  */
 double matrix_minor(matrix_t *A, element_index index) {
-  return (A->rows)? minor_of_second_order_matrix(A) : minor_of_third_order_matrix(A, index);
+  if (A->rows == 2) return minor_of_second_order_matrix(A);
+
+  return (A->rows == 2)? minor_of_second_order_matrix(A) : minor_of_third_order_matrix(A, index);
 }
 
 double minor_of_third_order_matrix(matrix_t *A, element_index index) {
@@ -48,7 +54,6 @@ double minor_of_third_order_matrix(matrix_t *A, element_index index) {
   int column_count = 0;
   matrix_t tmp_matrix;
   s21_create_matrix(A->rows - 1, A->columns - 1, &tmp_matrix);
-
   for (int i = 0; i < A->rows; i++) {
     for (int ii = 0; ii < A->columns; ii++) {
       if (index.row != i && index.column != ii) {

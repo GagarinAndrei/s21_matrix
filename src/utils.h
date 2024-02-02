@@ -20,4 +20,7 @@ double matrix_minor(matrix_t *A, element_index index);
 double minor_of_second_order_matrix(matrix_t *A);
 double minor_of_third_order_matrix(matrix_t *A, element_index index);
 
+double second_order_determinant(matrix_t *A);
+
+
 #endif

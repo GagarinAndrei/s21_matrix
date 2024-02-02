@@ -8,12 +8,13 @@
 
 int main() {
   // int result_code;
-  matrix_t A;
-  element_index element = {0, 1};
+  matrix_t A, result;
+  // element_index element = {0, 1};
   srand(time(NULL));
 
   //  B, result;
   s21_create_matrix(3, 3, &A);
+  s21_create_matrix(A.rows, A.columns, &result);
   for (int i = 0; i < A.rows; i++) {
     for (int ii = 0; ii < A.columns; ii++) {
       A.matrix[i][ii] = rand() % 10;
@@ -37,12 +38,13 @@ int main() {
   // print_matrix(B);
   // print_matrix(result);
   // printf("RESULT = %d\n", result_code);
-  matrix_minor(&A, element);
-  // print_matrix(A);
+  s21_calc_complements(&A, &result);
+  // matrix_minor(&A, element);
+  print_matrix(result);
 
   s21_remove_matrix(&A);
   // s21_remove_matrix(&B);
-  // s21_remove_matrix(&result);
+  s21_remove_matrix(&result);
 
   return 0;
 }
