@@ -1,6 +1,7 @@
 
+#include <stdio.h>
+
 #include "s21_matrix.h"
-#include "tests/tests.h"
 #include "utils.h"
 
 /**
@@ -14,11 +15,15 @@
  */
 int s21_calc_complements(matrix_t *A, matrix_t *result) {
   int result_code = 0;
+  
+
   if (is_structure_null(A) || !is_correct_matrix(*A) ||
       is_structure_null(result))
     result_code = 1;
   else if (is_square_matrix(*A) || !is_eq_matrix_sizes(result, A))
     result_code = 2;
+  
+  
 
   return result_code;
 }
@@ -33,7 +38,12 @@ int s21_calc_complements(matrix_t *A, matrix_t *result) {
  *         которой нельзя провести вычисления и т.д.)
  */
 double matrix_minor(matrix_t *A, element_index index) {
-  // double minor;
+  return (A->rows)? minor_of_second_order_matrix(A) : minor_of_third_order_matrix(A, index);
+}
+
+double minor_of_third_order_matrix(matrix_t *A, element_index index) {
+  double minor;
+
   int row_count = 0;
   int column_count = 0;
   matrix_t tmp_matrix;
@@ -52,9 +62,16 @@ double matrix_minor(matrix_t *A, element_index index) {
     column_count = 0;
   }
 
-  print_matrix(tmp_matrix);
+  minor = minor_of_second_order_matrix(&tmp_matrix);
   s21_remove_matrix(&tmp_matrix);
-  return 0;
+
+  return minor;
+}
+
+double minor_of_second_order_matrix(matrix_t *A) {
+  double minor;
+  minor = A->matrix[0][0] * A->matrix[1][1] - A->matrix[0][1] * A->matrix[1][0];
+  return minor;
 }
 
 // void gauss_method(matrix_t *A) {}
