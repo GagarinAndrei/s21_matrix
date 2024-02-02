@@ -13,7 +13,7 @@
  */
 int s21_calc_complements(matrix_t *A, matrix_t *result) {
   int result_code = 0;
-  struct coordinates_struct index = {0};
+  element_index index = {0};
 
   if (is_structure_null(A) || !is_correct_matrix(*A) ||
       is_structure_null(result))

@@ -1,7 +1,7 @@
 #ifndef UTILS_H
 #define UTILS_H
 
-typedef struct coordinates_struct {
+typedef struct {
   int row;
   int column;
 } element_index;

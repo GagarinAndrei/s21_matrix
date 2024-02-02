@@ -12,19 +12,25 @@
  */
 int s21_determinant(matrix_t *A, double *result) {
   int result_code = 0;
-  struct coordinates_struct index = {0};
+  element_index index = {0};
+  int sign = 1;
   if (is_structure_null(A) || !is_correct_matrix(*A) || result == NULL)
     result_code = 1;
   else if (!is_square_matrix(*A))
     result_code = 2;
   if (A->rows == 2) *result = second_order_determinant(A);
-  if (A->rows == 3) {
+  else if (A->rows == 3) {
     for (int i = 0; i < A->columns; i++) {
-      index{ 0 , i} ;
-    *result += A->matrix[0][i] * minor_of_third_order_matrix(A, index)
-      
+    index.column = i;
+    *result += A->matrix[0][i] * minor_of_third_order_matrix(A, index);
+      sign = -sign;
     }
+  } else {
+    
+
   }
+
+
 
   return result_code;
 }
