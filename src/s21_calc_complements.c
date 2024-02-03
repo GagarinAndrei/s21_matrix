@@ -1,9 +1,10 @@
-#include "s21_matrix.h"
-#include "utils.h"
 #include <math.h>
 
+#include "s21_matrix.h"
+#include "utils.h"
+
 /**
- * Матрица алгебоаических дополнений
+ * Матрица алгебраических дополнений
  * @param A матрица
  * @param result указатель на итоговую матрицу
  * @return 0 - OK
@@ -13,70 +14,59 @@
  */
 int s21_calc_complements(matrix_t *A, matrix_t *result) {
   int result_code = 0;
-  element_index index = {0};
 
   if (is_structure_null(A) || !is_correct_matrix(*A) ||
       is_structure_null(result))
     result_code = 1;
-  else if (!is_square_matrix(*A) || !is_eq_matrix_sizes(result, A))
+  else if (!is_square_matrix(*A))
     result_code = 2;
-  
-  for (int i = 0; i < result->rows; i++) {
-    for (int ii = 0; ii < result->columns; ii++) {
-      index.row = i;
-      index.column = ii;
-      result->matrix[i][ii] = pow(-1, i + ii) * matrix_minor(A, index);
+  if (result_code == 0) {
+    matrix_t minor = {0};
+    double determinant = 0;
+    s21_create_matrix(A->rows, A->columns, result);
+    for (int i = 0; i < A->rows; i++) {
+      for (int ii = 0; ii < A->columns; ii++) {
+        minor_of_matrix(A, i, ii, &minor);
+        s21_determinant(&minor, &determinant);
+        result->matrix[i][ii] = pow(-1, i + ii) * determinant;
+      }
     }
   }
-
   return result_code;
 }
 
 /**
  * Минор матрицы
  * @param A матрица
+ * @param row строка искомого элемента
+ * @param column ряд искомого элемента
  * @param result указатель на итоговую матрицу
  * @return 0 - OK
  *         1 - Ошибка, некорректная матрица
  *         2 - Ошибка вычисления (несовпадающие размеры матриц; матрица, для
  *         которой нельзя провести вычисления и т.д.)
  */
-double matrix_minor(matrix_t *A, element_index index) {
-  if (A->rows == 2) return minor_of_second_order_matrix(A);
-
-  return (A->rows == 2)? minor_of_second_order_matrix(A) : minor_of_third_order_matrix(A, index);
-}
-
-double minor_of_third_order_matrix(matrix_t *A, element_index index) {
-  double minor;
-
+int minor_of_matrix(matrix_t *A, int row, int column, matrix_t *result) {
+  int result_code = 0;
   int row_count = 0;
   int column_count = 0;
-  matrix_t tmp_matrix;
-  s21_create_matrix(A->rows - 1, A->columns - 1, &tmp_matrix);
-  for (int i = 0; i < A->rows; i++) {
-    for (int ii = 0; ii < A->columns; ii++) {
-      if (index.row != i && index.column != ii) {
-        tmp_matrix.matrix[row_count][column_count] = A->matrix[i][ii];
-        column_count++;
+  if (A->rows == 1) {
+    s21_create_matrix(A->rows, A->columns, result);
+    result->matrix[0][0] = A->matrix[0][0];
+  } else {
+    s21_create_matrix(A->rows - 1, A->columns - 1, result);
+    for (int i = 0; i < A->rows; i++) {
+      for (int ii = 0; ii < A->columns; ii++) {
+        if (row != i && column != ii) {
+          result->matrix[row_count][column_count] = A->matrix[i][ii];
+          column_count++;
+        }
       }
+      if (row != i) {
+        row_count++;
+      }
+      column_count = 0;
     }
-    if (index.row != i) {
-      row_count++;
-    }
-    column_count = 0;
   }
-
-  minor = minor_of_second_order_matrix(&tmp_matrix);
-  s21_remove_matrix(&tmp_matrix);
-
-  return minor;
+  return result_code;
 }
-
-double minor_of_second_order_matrix(matrix_t *A) {
-  double minor;
-  minor = A->matrix[0][0] * A->matrix[1][1] - A->matrix[0][1] * A->matrix[1][0];
-  return minor;
-}
-
-// void gauss_method(matrix_t *A) {}

@@ -23,7 +23,7 @@ int sum_or_sum_matrix(matrix_t *A, matrix_t *B, matrix_t *result,
     result_code = 1;
   else if (!is_eq_matrix_sizes(A, B) && !is_eq_matrix_sizes(result, A))
     result_code = 2;
-  else {
+  else if (!s21_create_matrix(A->rows, B->columns, result)) {
     for (int i = 0; i < A->rows; i++) {
       for (int ii = 0; ii < A->columns; ii++) {
         result->matrix[i][ii] = (operation)

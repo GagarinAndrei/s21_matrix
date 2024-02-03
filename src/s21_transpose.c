@@ -17,9 +17,11 @@ int s21_transpose(matrix_t *A, matrix_t *result) {
     return 1;
   if (A->rows != result->columns || A->columns != result->rows) return 2;
   int return_code = 0;
-  for (int i = 0; i < A->rows; i++) {
-    for (int ii = 0; ii < A->columns; ii++) {
-      result->matrix[ii][i] = A->matrix[i][ii];
+  if (!s21_create_matrix(A->columns, A->rows, result)) {
+    for (int i = 0; i < A->rows; i++) {
+      for (int ii = 0; ii < A->columns; ii++) {
+        result->matrix[ii][i] = A->matrix[i][ii];
+      }
     }
   }
   return return_code;

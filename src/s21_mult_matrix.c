@@ -13,11 +13,12 @@
 int s21_mult_number(matrix_t *A, double number, matrix_t *result) {
   int result_code = 0;
   if (is_structure_null(A) || !is_correct_matrix(*A) ||
-      is_structure_null(result))
+      is_structure_null(result)) {
     result_code = 1;
-  else if (!is_eq_matrix_sizes(result, A))
-    result_code = 2;
-  else {
+  }
+  // else if (!is_eq_matrix_sizes(result, A))
+  // result_code = 2;
+  else if (!s21_create_matrix(A->rows, A->columns, result)) {
     for (int i = 0; i < A->rows; i++) {
       for (int ii = 0; ii < A->columns; ii++) {
         result->matrix[i][ii] = A->matrix[i][ii] * number;
@@ -43,10 +44,9 @@ int s21_mult_matrix(matrix_t *A, matrix_t *B, matrix_t *result) {
   if (!is_correct_matrix(*A) || !is_correct_matrix(*B) ||
       is_structure_null(result))
     result_code = 1;
-  else if (A->columns != B->rows || A->rows != B->columns ||
-           result->rows != A->rows || result->columns != B->columns)
+  else if (A->rows != B->columns)
     result_code = 2;
-  else {
+  else if (!s21_create_matrix(A->rows, B->columns, result)) {
     for (int i = 0; i < A->rows; i++) {
       for (int ii = 0; ii < B->columns; ii++) {
         result->matrix[i][ii] = 0;

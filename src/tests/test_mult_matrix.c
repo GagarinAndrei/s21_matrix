@@ -30,7 +30,7 @@ START_TEST(s21_mult_matrix_1) {
   reference.matrix[2][1] = 40;
   reference.matrix[2][2] = 51;
 
-  s21_create_matrix(A.rows, B.columns, &result);
+  // s21_create_matrix(A.rows, B.columns, &result);
   result_code = s21_mult_matrix(&A, &B, &result);
   ck_assert_int_eq(result_code, 0);
   ck_assert_int_eq(s21_eq_matrix(&result, &reference), 1);
@@ -53,14 +53,12 @@ START_TEST(s21_mult_matrix_2) {
   B.matrix[0][1] = 2;
   B.matrix[1][0] = 3;
   B.matrix[1][1] = 4;
-  s21_create_matrix(A.rows, B.columns, &result);
 
   result_code = s21_mult_matrix(&A, &B, &result);
 
   ck_assert_int_eq(result_code, 2);
   s21_remove_matrix(&A);
   s21_remove_matrix(&B);
-  s21_remove_matrix(&result);
 }
 
 START_TEST(s21_mult_matrix_3) {
@@ -102,8 +100,6 @@ START_TEST(s21_mult_matrix_4) {
     }
   }
 
-  s21_create_matrix(2, 2, &result);
-
   result_code = s21_mult_number(&A, number, &result);
 
   ck_assert_int_eq(result_code, 0);
@@ -118,11 +114,10 @@ START_TEST(s21_mult_matrix_5) {
   double number = 2.2345;
   matrix_t A, result;
   s21_create_matrix(4, 2, &A);
-  s21_create_matrix(2, 2, &result);
 
   result_code = s21_mult_number(&A, number, &result);
 
-  ck_assert_int_eq(result_code, 2);
+  ck_assert_int_eq(result_code, 0);
   s21_remove_matrix(&A);
   s21_remove_matrix(&result);
 }
@@ -131,7 +126,6 @@ START_TEST(s21_mult_matrix_6) {
   int result_code;
   double number = 2.2345;
   matrix_t result;
-  // s21_create_matrix(4, 2, NULL);
   s21_create_matrix(2, 2, &result);
 
   result_code = s21_mult_number(NULL, number, &result);
