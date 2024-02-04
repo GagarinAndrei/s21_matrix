@@ -19,7 +19,6 @@ START_TEST(s21_transpose_1) {
   reference.matrix[1][0] = 2;
   reference.matrix[1][1] = 4;
   reference.matrix[1][2] = 6;
-  s21_create_matrix(A.columns, A.rows, &result);
   result_code = s21_transpose(&A, &result);
   ck_assert_int_eq(result_code, 0);
   ck_assert_int_eq(s21_eq_matrix(&result, &reference), 1);
@@ -47,10 +46,9 @@ START_TEST(s21_transpose_3) {
   int result_code;
   matrix_t A, result;
   s21_create_matrix(3, 2, &A);
-  s21_create_matrix(A.rows, A.rows, &result);
   result_code = s21_transpose(&A, &result);
 
-  ck_assert_int_eq(result_code, 2);
+  ck_assert_int_eq(result_code, 0);
   s21_remove_matrix(&A);
   s21_remove_matrix(&result);
 }

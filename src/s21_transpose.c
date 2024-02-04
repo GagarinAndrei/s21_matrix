@@ -12,12 +12,10 @@
  *         которой нельзя провести вычисления и т.д.)
  */
 int s21_transpose(matrix_t *A, matrix_t *result) {
-  if (A == NULL || result == NULL || !is_correct_matrix(*A) ||
-      !is_correct_matrix(*result))
-    return 1;
-  if (A->rows != result->columns || A->columns != result->rows) return 2;
-  int return_code = 0;
-  if (!s21_create_matrix(A->columns, A->rows, result)) {
+  if (is_structure_null(A) || is_structure_null(result)) return 1;
+  if (!is_correct_matrix(*A)) return 1;
+  int return_code = s21_create_matrix(A->columns, A->rows, result);
+  if (0 == return_code) {
     for (int i = 0; i < A->rows; i++) {
       for (int ii = 0; ii < A->columns; ii++) {
         result->matrix[ii][i] = A->matrix[i][ii];

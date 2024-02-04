@@ -19,10 +19,10 @@ int s21_calc_complements(matrix_t *A, matrix_t *result) {
       is_structure_null(result) ||
       s21_create_matrix(A->rows, A->columns, result))
     result_code = 1;
-  else if (!is_square_matrix(*A))
+  else if (!is_square_matrix(A))
     result_code = 2;
   if (result_code == 0) {
-    matrix_t minor = {0};
+    matrix_t minor;
     double determinant = 0;
     for (int i = 0; i < A->rows; i++) {
       for (int ii = 0; ii < A->columns; ii++) {
@@ -46,27 +46,29 @@ int s21_calc_complements(matrix_t *A, matrix_t *result) {
  *         2 - Ошибка вычисления (несовпадающие размеры матриц; матрица, для
  *         которой нельзя провести вычисления и т.д.)
  */
-int minor_of_matrix(matrix_t *A, int row, int column, matrix_t *result) {
+void minor_of_matrix(matrix_t *A, int row, int column, matrix_t *result) {
   int result_code = 0;
   int row_count = 0;
   int column_count = 0;
   if (A->rows == 1) {
-    s21_create_matrix(A->rows, A->columns, result);
-    result->matrix[0][0] = A->matrix[0][0];
+    result_code = s21_create_matrix(A->rows, A->columns, result);
+    if (0 == result_code) result->matrix[0][0] = A->matrix[0][0];
   } else {
-    s21_create_matrix(A->rows - 1, A->columns - 1, result);
-    for (int i = 0; i < A->rows; i++) {
-      for (int ii = 0; ii < A->columns; ii++) {
-        if (row != i && column != ii) {
-          result->matrix[row_count][column_count] = A->matrix[i][ii];
-          column_count++;
+    result_code = s21_create_matrix(A->rows - 1, A->columns - 1, result);
+    if (0 == result_code) {
+      for (int i = 0; i < A->rows; i++) {
+        for (int ii = 0; ii < A->columns; ii++) {
+          if (row != i && column != ii) {
+            result->matrix[row_count][column_count] = A->matrix[i][ii];
+            column_count++;
+          }
         }
+        if (row != i) {
+          row_count++;
+        }
+        column_count = 0;
       }
-      if (row != i) {
-        row_count++;
-      }
-      column_count = 0;
     }
   }
-  return result_code;
+  // return result_code;
 }

@@ -15,7 +15,7 @@
 int s21_determinant(matrix_t *A, double *result) {
   if (is_structure_null(A) || !is_correct_matrix(*A) || result == NULL)
     return 1;
-  else if (!is_square_matrix(*A))
+  else if (!is_square_matrix(A))
     return 2;
   int result_code = 0;
   double tmp_result = 0;

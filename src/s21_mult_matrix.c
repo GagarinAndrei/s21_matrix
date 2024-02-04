@@ -17,12 +17,10 @@ int s21_mult_number(matrix_t *A, double number, matrix_t *result) {
       s21_create_matrix(A->rows, A->columns, result)) {
     result_code = 1;
   }
-  // else if (!is_eq_matrix_sizes(result, A))
-  // result_code = 2;
-  else if (!s21_create_matrix(A->rows, A->columns, result)) {
+  if (result_code == 0) {
     for (int i = 0; i < A->rows; i++) {
       for (int ii = 0; ii < A->columns; ii++) {
-        result->matrix[i][ii] = A->matrix[i][ii] * number;
+        result->matrix[i][ii] = (A->matrix[i][ii]) * number;
       }
     }
   }

@@ -1,4 +1,5 @@
 #include <check.h>
+#include <stdio.h>
 
 #include "tests.h"
 
@@ -79,7 +80,7 @@ START_TEST(s21_inverse_matrix_3) {
 }
 
 Suite *test_inverse_matrix(void) {
-  Suite *suite = suite_create("\033[45m-=S21_inverse_matrix=-\033[0m");
+  Suite *suite = suite_create("\033[45m-=S21_INVERSE_MATRIX=-\033[0m");
   TCase *test_case = tcase_create("inverse_matrix_test_case");
 
   tcase_add_test(test_case, s21_inverse_matrix_1);
