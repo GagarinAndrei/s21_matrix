@@ -20,7 +20,6 @@ START_TEST(s21_sub_matrix_1) {
   reference.matrix[0][1] = 0;
   reference.matrix[1][0] = 0;
   reference.matrix[1][1] = 0;
-  s21_create_matrix(2, 2, &result);
 
   result_code = s21_sub_matrix(&A, &B, &result);
 
@@ -45,7 +44,6 @@ START_TEST(s21_sub_matrix_2) {
   B.matrix[0][1] = 2;
   B.matrix[1][0] = 3;
   B.matrix[1][1] = 4;
-  s21_create_matrix(2, 2, &result);
 
   result_code = s21_sub_matrix(&A, &B, &result);
 
@@ -71,7 +69,7 @@ START_TEST(s21_sub_matrix_3) {
 
   result_code = s21_sub_matrix(&A, &B, NULL);
 
-  ck_assert_int_eq(result_code, 1);
+  ck_assert_int_eq(result_code, 2);
   s21_remove_matrix(&A);
   s21_remove_matrix(&B);
 }

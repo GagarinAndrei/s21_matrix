@@ -19,11 +19,11 @@ int sum_or_sum_matrix(matrix_t *A, matrix_t *B, matrix_t *result,
                       int operation) {
   int result_code = 0;
   if (!is_correct_matrix(*A) || !is_correct_matrix(*B) ||
-      is_structure_null(result))
+      is_structure_null(result) ||
+      s21_create_matrix(A->rows, A->columns, result))
     result_code = 1;
-  else if (!is_eq_matrix_sizes(A, B) && !is_eq_matrix_sizes(result, A))
-    result_code = 2;
-  else if (!s21_create_matrix(A->rows, B->columns, result)) {
+  if (!is_eq_matrix_sizes(A, B)) result_code = 2;
+  if (result_code == 0) {
     for (int i = 0; i < A->rows; i++) {
       for (int ii = 0; ii < A->columns; ii++) {
         result->matrix[i][ii] = (operation)

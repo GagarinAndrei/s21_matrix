@@ -20,7 +20,6 @@ START_TEST(s21_sum_matrix_1) {
   reference.matrix[0][1] = 4;
   reference.matrix[1][0] = 6;
   reference.matrix[1][1] = 8;
-  s21_create_matrix(2, 2, &result);
 
   result_code = s21_sum_matrix(&A, &B, &result);
 
@@ -50,7 +49,6 @@ START_TEST(s21_sum_matrix_2) {
   reference.matrix[0][1] = 4;
   reference.matrix[1][0] = 6;
   reference.matrix[1][1] = 8;
-  s21_create_matrix(2, 2, &result);
 
   result_code = s21_sum_matrix(&A, &B, &result);
 
@@ -63,7 +61,7 @@ START_TEST(s21_sum_matrix_2) {
 
 START_TEST(s21_sum_matrix_3) {
   int result_code;
-  matrix_t A, B, reference;
+  matrix_t A, B;
   s21_create_matrix(3, 2, &A);
   A.matrix[0][0] = 1;
   A.matrix[0][1] = 2;
@@ -74,18 +72,12 @@ START_TEST(s21_sum_matrix_3) {
   B.matrix[0][1] = 2;
   B.matrix[1][0] = 3;
   B.matrix[1][1] = 4;
-  s21_create_matrix(2, 2, &reference);
-  reference.matrix[0][0] = 2;
-  reference.matrix[0][1] = 4;
-  reference.matrix[1][0] = 6;
-  reference.matrix[1][1] = 8;
 
   result_code = s21_sum_matrix(&A, &B, NULL);
 
-  ck_assert_int_eq(result_code, 1);
+  ck_assert_int_eq(result_code, 2);
   s21_remove_matrix(&A);
   s21_remove_matrix(&B);
-  s21_remove_matrix(&reference);
 }
 
 Suite *test_sum_matrix(void) {

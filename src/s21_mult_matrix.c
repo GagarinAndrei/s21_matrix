@@ -13,7 +13,8 @@
 int s21_mult_number(matrix_t *A, double number, matrix_t *result) {
   int result_code = 0;
   if (is_structure_null(A) || !is_correct_matrix(*A) ||
-      is_structure_null(result)) {
+      is_structure_null(result) ||
+      s21_create_matrix(A->rows, A->columns, result)) {
     result_code = 1;
   }
   // else if (!is_eq_matrix_sizes(result, A))
