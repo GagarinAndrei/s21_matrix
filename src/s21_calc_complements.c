@@ -29,6 +29,7 @@ int s21_calc_complements(matrix_t *A, matrix_t *result) {
         minor_of_matrix(A, i, ii, &minor);
         s21_determinant(&minor, &determinant);
         result->matrix[i][ii] = pow(-1, i + ii) * determinant;
+        s21_remove_matrix(&minor);
       }
     }
   }

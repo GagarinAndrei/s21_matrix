@@ -24,7 +24,6 @@ int s21_create_matrix(int rows, int columns, matrix_t *result) {
   int result_code = 0;
   int calloc_success_count = 0;
 
-  // if (result->rows && result->columns && result->matrix) {
   result->matrix = (double **)calloc(rows, sizeof(double *));
   if (result->matrix == NULL) result_code = 2;
 

@@ -25,14 +25,14 @@ int s21_determinant(matrix_t *A, double *result) {
   if (A->rows == 1)
     tmp_result = A->matrix[0][0];
   else {
-    matrix_t tmp_matrix = {0};
+    matrix_t tmp_matrix;
     for (int i = 0; i < A->columns; i++) {
       minor_of_matrix(A, 0, i, &tmp_matrix);
       s21_determinant(&tmp_matrix, &tmp_determenant);
       tmp_result += sign * A->matrix[0][i] * tmp_determenant;
       sign = -sign;
+      s21_remove_matrix(&tmp_matrix);
     }
-    s21_remove_matrix(&tmp_matrix);
   }
   *result = tmp_result;
   return result_code;

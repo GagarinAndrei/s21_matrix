@@ -126,6 +126,7 @@ START_TEST(s21_calc_complements_4) {
 
   ck_assert_int_eq(result_code, 2);
   s21_remove_matrix(&A);
+  s21_remove_matrix(&result);
 }
 
 START_TEST(s21_calc_complements_5) {

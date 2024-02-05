@@ -164,7 +164,6 @@ START_TEST(s21_mult_matrix_7) {
   reference.matrix[1][1] = A.matrix[1][0] * B.matrix[0][1] +
                            A.matrix[1][1] * B.matrix[1][1] +
                            A.matrix[1][2] * B.matrix[2][1];
-  s21_create_matrix(A.rows, B.columns, &result);
   result_code = s21_mult_matrix(&A, &B, &result);
   ck_assert_int_eq(result_code, 0);
   ck_assert_int_eq(s21_eq_matrix(&result, &reference), 1);
