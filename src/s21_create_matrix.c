@@ -13,7 +13,9 @@
  *и т.д.)
  */
 int s21_create_matrix(int rows, int columns, matrix_t *result) {
-  if (is_structure_null(result)) return 1;
+  if (is_structure_null(result)) {
+    return 1;
+  }
   if (rows <= 0 || columns <= 0) {
     result->rows = 0;
     result->columns = 0;
@@ -41,7 +43,6 @@ int s21_create_matrix(int rows, int columns, matrix_t *result) {
         free(result->matrix[i]);
       }
       free(result->matrix);
-      result->matrix = NULL;
     } else {
       result->rows = rows;
       result->columns = columns;

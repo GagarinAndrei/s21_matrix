@@ -26,7 +26,7 @@ gcov_report: clean s21_matrix.a
 	./s21_matrix
 	lcov -t "./s21_matrix" -o report.info --no-external -c -d .
 	genhtml -o report report.info
-	open ./report/index.html
+	firefox ./report/index.html
 
 clean:
 	rm -rf s21_matrix *.a $(OBJECTS) a.out *.gcno *.gcda report report.info *.dSYM
